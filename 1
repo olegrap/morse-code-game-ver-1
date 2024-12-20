@@ -1,0 +1,57 @@
+import random
+
+# Морзянка: символы и их коды
+MORSE_CODE = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+    'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+    'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---',
+    'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+    'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--', 'Z': '--..',
+    '1': '.----', '2': '..---', '3': '...--', '4': '....-', '5': '.....',
+    '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----'
+}
+
+# Функция для вывода приветствия и правил
+def print_welcome():
+    print("Добро пожаловать в игру по изучению азбуки Морзе!")
+    print("Вам будет предложен символ азбуки Морзе. Введите соответствующую букву или цифру.")
+
+# Генерация случайного символа и его кода
+def get_random_morse():
+    symbol, code = random.choice(list(MORSE_CODE.items()))
+    return symbol, code
+
+# Основной игровой цикл
+def morse_game(predefined_answers):
+    print_welcome()
+    score = 0
+    total_questions = len(predefined_answers)
+
+    for i, (symbol, user_input) in enumerate(predefined_answers):
+        print(f"Вопрос {i+1}: Код Морзе - {MORSE_CODE[symbol]}")
+        answer = user_input.upper()
+
+        if answer == symbol:
+            print("Верно! Отличная работа!")
+            score += 1
+        else:
+            print(f"Неверно. Правильный ответ: {symbol}")
+
+    print(f"\nИгра окончена. Ваш счет: {score}/{total_questions}")
+    if score == total_questions:
+        print("Превосходно! Вы отлично знаете азбуку Морзе.")
+    elif score > total_questions // 2:
+        print("Хорошо! Но есть куда расти.")
+    else:
+        print("Не переживайте, продолжайте тренироваться!")
+
+# Тестовые данные
+if __name__ == "__main__":
+    predefined_answers = [
+        ('A', 'A'),
+        ('B', 'C'),
+        ('C', 'C'),
+        ('D', 'D'),
+        ('E', 'E')
+    ]
+    morse_game(predefined_answers)
